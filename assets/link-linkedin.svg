@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="48" viewBox="0 0 200 48" font-family="'JetBrains Mono','SF Mono','Cascadia Code','Roboto Mono',Consolas,'Liberation Mono',monospace" role="img">
+<defs><style>
+@media (prefers-reduced-motion: reduce){*{animation:none!important;opacity:1!important}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+</style></defs>
+<rect width="200" height="48" fill="#070a0f"/>
+
+<rect x=".5" y=".5" width="199" height="47" fill="#0b1017" stroke="#2a3748"/>
+<rect x="0" y="0" width="3" height="48" fill="#7df9ff"/>
+<text x="20" y="21" font-size="12" font-weight="700" letter-spacing="3" fill="#e6edf3">LINKEDIN</text>
+<text x="20" y="37" font-size="10.5" fill="#8593a6">YOUR_LINKEDIN_URL</text>
+<path d="M168,31 L182,17 M170,17 H182 V29"
+      fill="none" stroke="#7df9ff" stroke-width="1.5"/>
+</svg>

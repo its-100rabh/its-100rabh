@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="256" viewBox="0 0 440 256" font-family="'JetBrains Mono','SF Mono','Cascadia Code','Roboto Mono',Consolas,'Liberation Mono',monospace" role="img">
+<defs><style>
+@media (prefers-reduced-motion: reduce){*{animation:none!important;opacity:1!important}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.r{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}</style></defs>
+<rect width="440" height="256" fill="#070a0f"/>
+<rect x="0.5" y="0.5" width="439" height="255" fill="#0b1017" stroke="#18212d"/>
+<path d="M0,12 V0 H12 M428,0 H440 V12 M440,244 V256 H428 M12,256 H0 V244" fill="none" stroke="#7df9ff" stroke-width="1.5" opacity="1"/>
+<text x="18" y="23" font-size="10.5" font-weight="700" letter-spacing="3" fill="#8593a6">TELEMETRY</text>
+<path d="M18,36.5 H422" stroke="#18212d"/>
+<text x="422" y="23" font-size="10" letter-spacing="2" text-anchor="end" fill="#4b596b">LIVE</text>
+<text class="r" x="18" y="80" font-size="26" font-weight="800" fill="#e6edf3" style="animation-delay:0.00s">—</text><text class="r" x="18" y="97" font-size="9.5" letter-spacing="2" fill="#4b596b" style="animation-delay:0.00s">CONTRIBUTIONS · 1Y</text>
+<text class="r" x="224" y="80" font-size="26" font-weight="800" fill="#e6edf3" style="animation-delay:0.07s">—</text><text class="r" x="224" y="97" font-size="9.5" letter-spacing="2" fill="#4b596b" style="animation-delay:0.07s">COMMITS</text>
+<text class="r" x="18" y="132" font-size="26" font-weight="800" fill="#e6edf3" style="animation-delay:0.14s">—</text><text class="r" x="18" y="149" font-size="9.5" letter-spacing="2" fill="#4b596b" style="animation-delay:0.14s">PULL REQUESTS</text>
+<text class="r" x="224" y="132" font-size="26" font-weight="800" fill="#e6edf3" style="animation-delay:0.21s">—</text><text class="r" x="224" y="149" font-size="9.5" letter-spacing="2" fill="#4b596b" style="animation-delay:0.21s">CODE REVIEWS</text>
+<text class="r" x="18" y="184" font-size="26" font-weight="800" fill="#e6edf3" style="animation-delay:0.28s">—</text><text class="r" x="18" y="201" font-size="9.5" letter-spacing="2" fill="#4b596b" style="animation-delay:0.28s">STARS EARNED</text>
+<text class="r" x="224" y="184" font-size="26" font-weight="800" fill="#e6edf3" style="animation-delay:0.35s">—</text><text class="r" x="224" y="201" font-size="9.5" letter-spacing="2" fill="#4b596b" style="animation-delay:0.35s">FOLLOWERS</text>
+<path d="M18,214.5 H422" stroke="#18212d"/>
+<text x="18" y="238" font-size="10" letter-spacing="2" fill="#8593a6">CURRENT STREAK</text><text x="146" y="238" font-size="13" font-weight="800" fill="#7df9ff">—</text><text x="224" y="238" font-size="10" letter-spacing="2" fill="#8593a6">LONGEST</text><text x="296" y="238" font-size="13" font-weight="800" fill="#7df9ff">—</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340" font-family="'JetBrains Mono','SF Mono','Cascadia Code','Roboto Mono',Consolas,'Liberation Mono',monospace" role="img">
+<defs>
+<pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+  <path d="M30 0H0V30" fill="none" stroke="#18212d" stroke-width="1"/>
+</pattern>
+<radialGradient id="glow" cx="50%" cy="0%" r="80%">
+  <stop offset="0" stop-color="#7df9ff" stop-opacity=".17"/>
+  <stop offset="1" stop-color="#7df9ff" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="fade" x1="0" x2="0" y1="0" y2="1">
+  <stop offset="0" stop-color="#070a0f" stop-opacity="0"/>
+  <stop offset="1" stop-color="#070a0f" stop-opacity="1"/>
+</linearGradient>
+<linearGradient id="ink" x1="0" x2="0" y1="0" y2="1">
+  <stop offset="0" stop-color="#ffffff"/>
+  <stop offset="1" stop-color="#9fb4c4"/>
+</linearGradient>
+<linearGradient id="beam" x1="0" x2="1" y1="0" y2="0">
+  <stop offset="0" stop-color="#7df9ff" stop-opacity="0"/>
+  <stop offset=".5" stop-color="#7df9ff" stop-opacity=".6"/>
+  <stop offset="1" stop-color="#7df9ff" stop-opacity="0"/>
+</linearGradient><style>
+@media (prefers-reduced-motion: reduce){*{animation:none!important;opacity:1!important}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.r{opacity:0;animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.f{opacity:0;animation:fade 1.4s ease forwards}
+.b{animation:blink 2.4s ease-in-out infinite}
+.scan{animation:scan 7s linear infinite}
+@keyframes scan{0%{transform:translateY(-4px);opacity:0}8%{opacity:1}92%{opacity:1}100%{transform:translateY(344px);opacity:0}}
+</style></defs>
+<rect width="900" height="340" fill="#070a0f"/>
+
+<rect width="900" height="340" fill="#070a0f"/>
+<rect width="900" height="340" fill="url(#grid)" opacity=".55"/>
+<rect width="900" height="340" fill="url(#glow)"/>
+<rect y="190" width="900" height="150" fill="url(#fade)"/>
+<path d="M16,34 V16 H34 M866,16 H884 V34 M884,306 V324 H866 M34,324 H16 V306" fill="none" stroke="#7df9ff" stroke-width="1.5" opacity="0.9"/>
+<text x="40" y="38" font-size="10" letter-spacing="4" fill="#4b596b">// DEVELOPER IDENTITY</text>
+<circle class="b" cx="860" cy="34" r="3" fill="#7df9ff"/>
+<text x="848" y="38" font-size="10" letter-spacing="3" text-anchor="end" fill="#8593a6">ONLINE</text>
+
+<text class="f" x="459" y="174" text-anchor="middle" font-size="96" font-weight="800"
+      letter-spacing="10" fill="none" stroke="#7df9ff" stroke-width="1" opacity=".5"
+      style="animation-delay:.25s">ITS-100RABH</text>
+<text class="r" x="455" y="170" text-anchor="middle" font-size="96" font-weight="800"
+      letter-spacing="10" fill="url(#ink)">ITS-100RABH</text>
+<text class="r" x="456" y="216" text-anchor="middle" font-size="17" font-weight="600"
+      letter-spacing="12" fill="#7df9ff" style="animation-delay:.2s">SOFTWARE ENGINEER</text>
+<text class="r" x="450" y="250" text-anchor="middle" font-size="13.5" fill="#8593a6"
+      style="animation-delay:.4s">Designing reliable systems and the interfaces people touch.</text>
+
+<path d="M40,296 H860" stroke="#2a3748"/>
+<path d="M40,296 v8 M60,296 v4 M80,296 v4 M100,296 v4 M120,296 v4 M140,296 v8 M160,296 v4 M180,296 v4 M200,296 v4 M220,296 v4 M240,296 v8 M260,296 v4 M280,296 v4 M300,296 v4 M320,296 v4 M340,296 v8 M360,296 v4 M380,296 v4 M400,296 v4 M420,296 v4 M440,296 v8 M460,296 v4 M480,296 v4 M500,296 v4 M520,296 v4 M540,296 v8 M560,296 v4 M580,296 v4 M600,296 v4 M620,296 v4 M640,296 v8 M660,296 v4 M680,296 v4 M700,296 v4 M720,296 v4 M740,296 v8 M760,296 v4 M780,296 v4 M800,296 v4 M820,296 v4 M840,296 v8 M860,296 v4 " stroke="#2a3748" fill="none"/>
+<path d="M40,296 H140" stroke="#7df9ff" stroke-width="2"/>
+<text class="r" x="452" y="324" text-anchor="middle" font-size="10" letter-spacing="4" fill="#4b596b"
+      style="animation-delay:.6s">BACKEND  ·  MOBILE  ·  INFRASTRUCTURE</text>
+<rect class="scan" x="0" y="0" width="900" height="2" fill="url(#beam)"/>
+</svg>

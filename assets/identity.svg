@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="214" viewBox="0 0 900 214" font-family="'JetBrains Mono','SF Mono','Cascadia Code','Roboto Mono',Consolas,'Liberation Mono',monospace" role="img">
+<defs><style>
+@media (prefers-reduced-motion: reduce){*{animation:none!important;opacity:1!important}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.r{opacity:0;animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}.b{animation:blink 2.4s ease-in-out infinite}</style></defs>
+<rect width="900" height="214" fill="#070a0f"/>
+
+<rect x="0.5" y="0.5" width="899" height="213" fill="#0b1017" stroke="#18212d"/>
+<path d="M0,12 V0 H12 M888,0 H900 V12 M900,202 V214 H888 M12,214 H0 V202" fill="none" stroke="#7df9ff" stroke-width="1.5" opacity="1"/>
+<text x="18" y="23" font-size="10.5" font-weight="700" letter-spacing="3" fill="#8593a6">IDENTITY.SYS</text>
+<path d="M18,36.5 H882" stroke="#18212d"/>
+<text x="882" y="23" font-size="10" letter-spacing="2" text-anchor="end" fill="#4b596b">ID-01</text>
+<text class="r" x="40" y="74" font-size="10.5" letter-spacing="3" fill="#4b596b" style="animation-delay:0.00s">HANDLE</text><text class="r" x="170" y="74" font-size="14" fill="#7df9ff" font-weight="700" style="animation-delay:0.00s">its-100rabh</text><text class="r" x="40" y="102" font-size="10.5" letter-spacing="3" fill="#4b596b" style="animation-delay:0.08s">ROLE</text><text class="r" x="170" y="102" font-size="14" fill="#e6edf3" font-weight="400" style="animation-delay:0.08s">Software Engineer</text><text class="r" x="40" y="130" font-size="10.5" letter-spacing="3" fill="#4b596b" style="animation-delay:0.16s">FOCUS</text><text class="r" x="170" y="130" font-size="14" fill="#e6edf3" font-weight="400" style="animation-delay:0.16s">Full-stack products · API design · Mobile</text><text class="r" x="40" y="158" font-size="10.5" letter-spacing="3" fill="#4b596b" style="animation-delay:0.24s">PRINCIPLE</text><text class="r" x="170" y="158" font-size="14" fill="#e6edf3" font-weight="400" style="animation-delay:0.24s">Ship small. Measure. Refine.</text><text class="r" x="40" y="186" font-size="10.5" letter-spacing="3" fill="#4b596b" style="animation-delay:0.32s">CURRENTLY</text><text class="r" x="170" y="186" font-size="14" fill="#e6edf3" font-weight="400" style="animation-delay:0.32s">Shipping production systems</text>
+<g>
+  <circle cx="770" cy="118" r="74" fill="none" stroke="#2a3748" stroke-dasharray="2 6">
+    <animateTransform attributeName="transform" type="rotate" from="0 770 118" to="360 770 118" dur="60s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="770" cy="118" r="52" fill="none" stroke="#0f4b55" stroke-width="1.5" stroke-dasharray="40 14 8 14">
+    <animateTransform attributeName="transform" type="rotate" from="360 770 118" to="0 770 118" dur="40s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="770" cy="118" r="30" fill="none" stroke="#2fb4c2" stroke-width="1" stroke-dasharray="3 5">
+    <animateTransform attributeName="transform" type="rotate" from="0 770 118" to="360 770 118" dur="24s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M686,118 H750 M790,118 H854 M770,34 V98 M770,138 V202" stroke="#2a3748"/>
+  <circle class="b" cx="770" cy="118" r="4" fill="#7df9ff"/>
+</g>
+</svg>

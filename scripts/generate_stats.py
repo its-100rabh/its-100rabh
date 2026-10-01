@@ -24,22 +24,42 @@ from design import *  # noqa: F401,F403
 OUT = Path(__file__).resolve().parent.parent / "assets" / "generated"
 LEVELS = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUARTILE": 3, "FOURTH_QUARTILE": 4}
 
+REPO_QUERY = """
+query($login:String!, $cursor:String!){
+  user(login:$login){
+    repositories(ownerAffiliations:OWNER, isFork:false, first:100, after:$cursor, orderBy:{field:PUSHED_AT, direction:DESC}){
+      pageInfo { hasNextPage endCursor }
+      nodes{
+        stargazerCount
+        languages(first:100, orderBy:{field:SIZE, direction:DESC}){ edges{ size node{ name } } }
+      }
+    }
+  }
+}
+"""
+
 QUERY = """
-query($login:String!){
+query($login:String!, $from:DateTime!, $to:DateTime!){
   user(login:$login){
     followers{ totalCount }
     repositories(ownerAffiliations:OWNER, isFork:false, first:100, orderBy:{field:PUSHED_AT, direction:DESC}){
       totalCount
+      pageInfo { hasNextPage endCursor }
       nodes{
         stargazerCount
-        languages(first:8, orderBy:{field:SIZE, direction:DESC}){ edges{ size node{ name } } }
+        languages(first:100, orderBy:{field:SIZE, direction:DESC}){ edges{ size node{ name } } }
       }
     }
-    contributionsCollection{
+    contributionsCollection(from: $from, to: $to){
+      startedAt
+      endedAt
       totalCommitContributions
       totalPullRequestContributions
       totalPullRequestReviewContributions
       totalIssueContributions
+      totalRepositoriesWithContributedCommits
+      totalRepositoriesWithContributedPullRequests
+      totalRepositoriesWithContributedPullRequestReviews
       contributionCalendar{
         totalContributions
         weeks{ contributionDays{ date contributionCount contributionLevel } }
@@ -52,20 +72,64 @@ query($login:String!){
 
 # ── Data ───────────────────────────────────────────────────────────────────
 def fetch(login, token):
-    req = urllib.request.Request(
-        "https://api.github.com/graphql",
-        data=json.dumps({"query": QUERY, "variables": {"login": login}}).encode(),
-        headers={
-            "Authorization": f"bearer {token}",
-            "Content-Type": "application/json",
-            "User-Agent": "profile-readme-generator",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        payload = json.load(r)
+    now = dt.datetime.now(dt.timezone.utc)
+    start = now - dt.timedelta(days=365)
+    variables = {
+        "login": login,
+        "from": start.isoformat().replace("+00:00", "Z"),
+        "to": now.isoformat().replace("+00:00", "Z")
+    }
+    def _post(q, v):
+        req = urllib.request.Request(
+            "https://api.github.com/graphql",
+            data=json.dumps({"query": q, "variables": v}).encode(),
+            headers={
+                "Authorization": f"bearer {token}",
+                "Content-Type": "application/json",
+                "User-Agent": "profile-readme-generator",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.load(r)
+
+    payload = _post(QUERY, variables)
+        
+    print("--- GITHUB API RAW RESPONSE LOG ---")
+    print(json.dumps(payload, indent=2))
+    print("-----------------------------------")
+    
     if payload.get("errors") or not payload.get("data", {}).get("user"):
         raise SystemExit("GitHub API error: " + json.dumps(payload.get("errors", payload))[:600])
-    return payload["data"]["user"]
+        
+    u = payload["data"]["user"]
+    
+    # Fetch remaining repository pages if total exceeds 100
+    page_info = u["repositories"]["pageInfo"]
+    while page_info.get("hasNextPage"):
+        next_v = {"login": login, "cursor": page_info["endCursor"]}
+        next_payload = _post(REPO_QUERY, next_v)
+        if next_payload.get("errors"):
+            print("Warning: Error fetching next page of repositories:", next_payload.get("errors"))
+            break
+        next_repos = next_payload["data"]["user"]["repositories"]
+        u["repositories"]["nodes"].extend(next_repos["nodes"])
+        page_info = next_repos["pageInfo"]
+        
+    cc = u["contributionsCollection"]
+    
+    print("\n--- TELEMETRY SUMMARY ---")
+    print(f"startedAt: {cc.get('startedAt')}")
+    print(f"endedAt: {cc.get('endedAt')}")
+    print(f"totalContributions: {cc['contributionCalendar']['totalContributions']}")
+    print(f"totalCommitContributions: {cc['totalCommitContributions']}")
+    print(f"totalPullRequestContributions: {cc['totalPullRequestContributions']}")
+    print(f"totalPullRequestReviewContributions: {cc['totalPullRequestReviewContributions']}")
+    print(f"totalIssueContributions: {cc['totalIssueContributions']}")
+    print(f"followers: {u['followers']['totalCount']}")
+    print(f"repository count (for lang/star agg): {len(u['repositories']['nodes'])} / {u['repositories']['totalCount']}")
+    print("-------------------------\n")
+    
+    return u
 
 
 def normalize(u):
@@ -87,6 +151,9 @@ def normalize(u):
         prs=cc["totalPullRequestContributions"],
         reviews=cc["totalPullRequestReviewContributions"],
         issues=cc["totalIssueContributions"],
+        repos_with_commits=cc.get("totalRepositoriesWithContributedCommits", 0),
+        repos_with_prs=cc.get("totalRepositoriesWithContributedPullRequests", 0),
+        repos_with_reviews=cc.get("totalRepositoriesWithContributedPullRequestReviews", 0),
         stars=sum(n["stargazerCount"] for n in nodes),
         followers=u["followers"]["totalCount"],
         repos=u["repositories"]["totalCount"],

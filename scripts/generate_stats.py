@@ -266,54 +266,6 @@ def render_languages(d):
     return svg(W, H, "\n".join(out), "", css)
 
 
-def render_matrix(d):
-    W = 900
-    weeks = d["weeks"]
-    n = len(weeks)
-    left, right = 46, 20
-    pitch = (W - left - right) / n
-    cell = pitch - 3
-    top = 66
-    H = 216
-    total_str = f'{d["total"]:,}' if isinstance(d["total"], int) else str(d["total"])
-    out = [panel(0, 0, W, H, "CONTRIBUTION MATRIX", f'{total_str} IN THE LAST 12 MONTHS')]
-
-    # month labels
-    marks, last_m = [], None
-    for wi, w in enumerate(weeks):
-        first = dt.date.fromisoformat(w[0][0])
-        if first.month != last_m:
-            marks.append((wi, first.strftime("%b").upper()))
-            last_m = first.month
-    # Drop a label when the next month starts within 3 weeks (avoids "SEPOCT" collisions),
-    # and drop a trailing label with no room to render.
-    keep = [m for i, m in enumerate(marks) if i == len(marks) - 1 or marks[i + 1][0] - m[0] >= 3]
-    keep = [m for m in keep if m[0] <= n - 3]
-    for wi, label in keep:
-        out.append(f'<text x="{left + wi * pitch:.1f}" y="{top - 8}" font-size="9" letter-spacing="1.5" fill="{DIM}">{label}</text>')
-    # weekday labels
-    for di, name in ((1, "MON"), (3, "WED"), (5, "FRI")):
-        out.append(f'<text x="18" y="{top + di * pitch + cell - 2:.1f}" font-size="8.5" letter-spacing="1" fill="{DIM}">{name}</text>')
-    # cells
-    for wi, w in enumerate(weeks):
-        cells = []
-        for di, (date, count, lvl) in enumerate(w):
-            cells.append(
-                f'<rect x="{left + wi * pitch:.1f}" y="{top + di * pitch:.1f}" width="{cell:.1f}" '
-                f'height="{cell:.1f}" fill="{HEAT[lvl]}"><title>{count} on {date}</title></rect>'
-            )
-        out.append(f'<g class="c" style="animation-delay:{wi * 0.018:.2f}s">{"".join(cells)}</g>')
-    # legend
-    ly = top + 7 * pitch + 22
-    lx = W - 18 - 5 * 14 - 34
-    out.append(f'<text x="{lx - 8}" y="{ly + 8}" font-size="9" letter-spacing="2" text-anchor="end" fill="{DIM}">LESS</text>')
-    for i in range(5):
-        out.append(f'<rect x="{lx + i * 14}" y="{ly}" width="10" height="10" fill="{HEAT[i]}"/>')
-    out.append(f'<text x="{lx + 5 * 14 + 4}" y="{ly + 8}" font-size="9" letter-spacing="2" fill="{DIM}">MORE</text>')
-    css = ".c{opacity:0;animation:fade .6s ease forwards}"
-    return svg(W, H, "\n".join(out), "", css)
-
-
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     if "--demo" in sys.argv:
@@ -326,8 +278,7 @@ def main():
         data = normalize(fetch(login, token))
     (OUT / "stats.svg").write_text(render_stats(data), encoding="utf-8")
     (OUT / "languages.svg").write_text(render_languages(data), encoding="utf-8")
-    (OUT / "contributions.svg").write_text(render_matrix(data), encoding="utf-8")
-    print("wrote 3 files to", OUT)
+    print("wrote 2 files to", OUT)
 
 
 if __name__ == "__main__":

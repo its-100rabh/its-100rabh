@@ -56,8 +56,7 @@ SECTIONS = [  # (file slug, number, TITLE, tag)
     ("identity", "01", "IDENTITY", "WHO"),
     ("stack", "02", "STACK", "CAPABILITY MAP"),
     ("activity", "03", "ACTIVITY", "GITHUB TELEMETRY"),
-    ("contributions", "04", "CONTRIBUTIONS", "LAST 12 MONTHS"),
-    ("connect", "05", "CONNECT", "CHANNELS"),
+    ("connect", "04", "CONNECT", "CHANNELS"),
 ]
 
 

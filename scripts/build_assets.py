@@ -48,7 +48,7 @@ TOOLS = [
 ]
 
 LINKS = [  # (file slug, LABEL, descriptor)
-    ("email", "EMAIL", "YOUR_EMAIL"),
+    ("email", "EMAIL", "saurabhmahapatra03@gmail.com"),
     ("linkedin", "LINKEDIN", "YOUR_LINKEDIN_URL"),
 ]
 

@@ -126,8 +126,14 @@ def fetch(login, token):
     print(f"totalPullRequestReviewContributions: {cc['totalPullRequestReviewContributions']}")
     print(f"totalIssueContributions: {cc['totalIssueContributions']}")
     print(f"followers: {u['followers']['totalCount']}")
-    print(f"repository count (for lang/star agg): {len(u['repositories']['nodes'])} / {u['repositories']['totalCount']}")
+    actual_fetched_repos = len(u['repositories']['nodes'])
+    total_matching_repos = u['repositories']['totalCount']
+    print(f"repository count (fetched via pagination / total matching filter): {actual_fetched_repos} / {total_matching_repos}")
+    print("Filter used: ownerAffiliations:OWNER, isFork:false")
     print("-------------------------\n")
+    
+    # Force the returned 'totalCount' to match the actual dataset aggregated
+    u['repositories']['totalCount'] = actual_fetched_repos
     
     return u
 
